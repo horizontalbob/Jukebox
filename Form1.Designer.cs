@@ -43,6 +43,9 @@
             this.txtBox_Tracks = new System.Windows.Forms.TextBox();
             this.btn_Next = new System.Windows.Forms.Button();
             this.btn_List = new System.Windows.Forms.Button();
+            this.btn_LstArtists = new System.Windows.Forms.Button();
+            this.btn_RemoveAtIndex = new System.Windows.Forms.Button();
+            this.txtBox_RemoveIndex = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_Remove
@@ -178,11 +181,41 @@
             this.btn_List.UseVisualStyleBackColor = true;
             this.btn_List.Click += new System.EventHandler(this.Btn_List_Click);
             // 
+            // btn_LstArtists
+            // 
+            this.btn_LstArtists.Location = new System.Drawing.Point(22, 316);
+            this.btn_LstArtists.Name = "btn_LstArtists";
+            this.btn_LstArtists.Size = new System.Drawing.Size(141, 33);
+            this.btn_LstArtists.TabIndex = 15;
+            this.btn_LstArtists.Text = "List Artists";
+            this.btn_LstArtists.UseVisualStyleBackColor = true;
+            this.btn_LstArtists.Click += new System.EventHandler(this.Btn_LstArtists_Click);
+            // 
+            // btn_RemoveAtIndex
+            // 
+            this.btn_RemoveAtIndex.Location = new System.Drawing.Point(492, 316);
+            this.btn_RemoveAtIndex.Name = "btn_RemoveAtIndex";
+            this.btn_RemoveAtIndex.Size = new System.Drawing.Size(141, 33);
+            this.btn_RemoveAtIndex.TabIndex = 16;
+            this.btn_RemoveAtIndex.Text = "Remove at index:";
+            this.btn_RemoveAtIndex.UseVisualStyleBackColor = true;
+            this.btn_RemoveAtIndex.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // txtBox_RemoveIndex
+            // 
+            this.txtBox_RemoveIndex.Location = new System.Drawing.Point(664, 323);
+            this.txtBox_RemoveIndex.Name = "txtBox_RemoveIndex";
+            this.txtBox_RemoveIndex.Size = new System.Drawing.Size(213, 20);
+            this.txtBox_RemoveIndex.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 450);
+            this.Controls.Add(this.txtBox_RemoveIndex);
+            this.Controls.Add(this.btn_RemoveAtIndex);
+            this.Controls.Add(this.btn_LstArtists);
             this.Controls.Add(this.btn_List);
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.label4);
@@ -224,6 +257,9 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btn_Next;
         private System.Windows.Forms.Button btn_List;
+        private System.Windows.Forms.Button btn_LstArtists;
+        private System.Windows.Forms.Button btn_RemoveAtIndex;
+        private System.Windows.Forms.TextBox txtBox_RemoveIndex;
     }
 }
 

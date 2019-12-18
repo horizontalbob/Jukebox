@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +16,9 @@ namespace Jukebox
     public partial class Form1 : Form
     {
         Stack spindle;
+        string docPath = "c:/temp";
+        const int MAX_STACK_SIZE = 9; //-1 for 0 based index
+
         public Form1()
         {
             InitializeComponent();
@@ -38,9 +43,22 @@ namespace Jukebox
         private void btn_Add_Click(object sender, EventArgs e)
         {
             errorProvider1.Clear();
-            if (spindle.Count() == 9)
+            if (spindle.Count() == MAX_STACK_SIZE)
             {
                 MessageBox.Show("Max CD's on spindle", "Message", MessageBoxButtons.OK);
+                try
+                {
+                    throw new Exception("Max CD's on Spindle");
+                }
+                catch (Exception ex)
+                {
+                    // Write the string array to a new file named "ErrorLog.txt".
+                    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "ErrorLog.txt")))
+                    {
+                        outputFile.WriteLine(ex.Message);
+                    }
+                }
+
                 ClearFields();
             }
             else
@@ -98,6 +116,15 @@ namespace Jukebox
             return true;
         }
 
+        private bool txtBox_TrackRemoveIndex_IsValid()
+        {
+            int i;
+            if (string.IsNullOrEmpty(txtBox_RemoveIndex.Text)) return false;
+            if (!Int32.TryParse(txtBox_RemoveIndex.Text, out i)) return false;
+            if (i > spindle.Count() || i < 0) return false;
+            return true;
+        }
+
         private bool AllValid()
         {
             return txtBox_Artist_IsValid() &&
@@ -144,7 +171,27 @@ namespace Jukebox
 
         private void Btn_List_Click(object sender, EventArgs e)
         {
-            txtBox_Artist.AppendText(spindle.List());
+            txtBox_Output.AppendText(spindle.List());
+        }
+
+        private void Btn_LstArtists_Click(object sender, EventArgs e)
+        {
+            txtBox_Output.AppendText(spindle.List("Artist"));
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (txtBox_TrackRemoveIndex_IsValid())
+            {
+                var index = Int32.Parse(txtBox_RemoveIndex.Text);
+                spindle.RemoveAtIndex(index);
+                txtBox_Output.AppendText($"Removed index {index} from stack"+Environment.NewLine);
+            }
+            else
+            {
+                errorProvider1.SetError(txtBox_RemoveIndex,
+                    "Removal index must be a valid int less that the total stack size" + Environment.NewLine);
+            }
         }
     }
 }
