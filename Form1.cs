@@ -37,7 +37,15 @@ namespace Jukebox
 
         private void btn_Remove_Click(object sender, EventArgs e)
         {
-
+            if (spindle.Count() == 0)
+            {
+                txtBox_Output.AppendText("Nothing in queue." + Environment.NewLine);
+            }
+            else
+            {
+                var node = spindle.Pop();
+                txtBox_Output.AppendText($"Removed: {node.Name}" + Environment.NewLine);
+            }
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -82,7 +90,7 @@ namespace Jukebox
 
         private void btn_Peek_Click(object sender, EventArgs e)
         {
-            txtBox_Output.AppendText($"Next on spindle {spindle.Info(spindle.Peek())}");
+            txtBox_Output.AppendText($@"Next on spindle {spindle.Info(spindle.Peek())}");
         }
 
         private void btn_Info_Click(object sender, EventArgs e)
@@ -166,7 +174,15 @@ namespace Jukebox
 
         private void Btn_Next_Click(object sender, EventArgs e)
         {
-
+            if (spindle.Count() == 0)
+            {
+                txtBox_Output.AppendText("Nothing in queue." + Environment.NewLine);
+            }
+            else
+            {
+                var node = spindle.Pop();
+                txtBox_Output.AppendText($"Now playing: {node.Name}" + Environment.NewLine);
+            }
         }
 
         private void Btn_List_Click(object sender, EventArgs e)
