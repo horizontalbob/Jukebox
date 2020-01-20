@@ -167,7 +167,7 @@
             this.btn_Next.Name = "btn_Next";
             this.btn_Next.Size = new System.Drawing.Size(141, 33);
             this.btn_Next.TabIndex = 13;
-            this.btn_Next.Text = "Play";
+            this.btn_Next.Text = "Play/Next";
             this.btn_Next.UseVisualStyleBackColor = true;
             this.btn_Next.Click += new System.EventHandler(this.Btn_Next_Click);
             // 
